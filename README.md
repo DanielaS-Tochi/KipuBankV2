@@ -2,92 +2,182 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-green)
 ![Network: Sepolia](https://img.shields.io/badge/Network-Sepolia-orange)
 
-# 🪙 KipuBankV2 Smart Contract
-
-## 🇬🇧 English
-
-### 📖 Overview
-**KipuBankV2** is an upgraded version of the original *KipuBank* smart contract.  
-It introduces **multi-token deposits**, **access control**, and a base for **Chainlink oracle integration**.  
-This version simulates a decentralized bank that supports both **ETH and ERC20 tokens**, with secure withdrawal limits and modular expansion capacity.
-
-### ✨ Key Improvements
-- ✅ Access control via `AccessControl` (admin and manager roles).  
-- ✅ Multi-token accounting (supports ETH and ERC20 tokens).  
-- ✅ Immutable and constant variables for safer configuration.  
-- ✅ Custom errors and events for observability and debugging.  
-- 🔜 Chainlink oracle integration to handle USD conversion.  
-- 🔜 Decimal conversion utilities for cross-token accounting.  
-- 🌟 Planned: *KipuPoints* — a loyalty program for long-term depositors.
-
-### ⚙️ Deployment Instructions
-1. Open [Remix IDE](https://remix.ethereum.org/)
-2. Create folder `/src` and upload `KipuBankV2.sol`
-3. Compile with **Solidity 0.8.20**
-4. Deploy on **Sepolia Testnet**
-   - Enter a `_bankCapUSD` (e.g. `100000`)
-   - Click **Deploy**
-5. Verify the contract in **Routescan** or **Sourcify**
-6. Save the deployed address and verification link in this README
-
-### 🧩 Interaction
-You can interact directly from Remix:
-- `deposit(address token, uint256 amount)` — deposit ETH or ERC20 tokens  
-  *(use `address(0)` for ETH and specify `value` in Remix)*  
-- `withdraw(address token, uint256 amount)` — withdraw your funds  
-- `balanceOf(address user, address token)` — check balances  
-
-### 🔐 Roles
-- **DEFAULT_ADMIN_ROLE:** Full control over contract management.  
-- **BANK_MANAGER_ROLE:** Permissioned role for future operations (e.g. Chainlink settings or cap updates).
-
-### 📬 Deployed Contract (example)
-> 🧱 Address: *to be added*  
-> 🔗 Verification: *to be added*
-
----
+# 🪙 KipuBank V2 Smart Contract
 
 ## 🇪🇸 Español
 
 ### 📖 Descripción
-**KipuBankV2** es una versión mejorada del contrato *KipuBank*, que incorpora **control de acceso**, **soporte multi-token** y base para integración con **oráculos de Chainlink**.  
-Simula un banco descentralizado donde los usuarios pueden **depositar y retirar ETH o tokens ERC20** de forma segura, dentro de límites predefinidos.
 
-### ✨ Mejoras Clave
-- ✅ Control de acceso con `AccessControl` (roles de admin y manager).  
-- ✅ Soporte multi-token (ETH y ERC20).  
-- ✅ Variables `immutable` y `constant` para mayor seguridad.  
-- ✅ Errores personalizados y eventos para mejorar el seguimiento.  
-- 🔜 Integración con Chainlink para convertir valores a USD.  
-- 🔜 Funciones para conversión de decimales entre tokens.  
-- 🌟 Próximamente: *KipuPoints*, un sistema de fidelidad para usuarios activos.
+**KipuBankV2** es una versión mejorada del contrato original **KipuBank**, desarrollada para el TP del **Módulo 3 – Aplicaciones descentralizadas**.  
+Esta nueva versión incorpora **control de acceso, soporte multi-token, integración con Chainlink, y mejoras de seguridad y arquitectura**, siguiendo buenas prácticas de Solidity y los estándares de la industria Web3.
 
-### ⚙️ Instrucciones de Despliegue
-1. Abrir [Remix IDE](https://remix.ethereum.org/)
-2. Crear la carpeta `/src` y subir `KipuBankV2.sol`
-3. Compilar con **Solidity 0.8.20**
-4. Desplegar en **Sepolia Testnet**
-   - Ingresar `_bankCapUSD` (ejemplo: `100000`)
-   - Click en **Deploy**
-5. Verificar el contrato en **Routescan** o **Sourcify**
-6. Agregar aquí la dirección desplegada y enlace de verificación.
-
-### 🧩 Interacción
-Desde Remix podés:
-- `deposit(address token, uint256 amount)` — depositar ETH o tokens ERC20  
-  *(usar `address(0)` para ETH y especificar `value` en Remix)*  
-- `withdraw(address token, uint256 amount)` — retirar tus fondos  
-- `balanceOf(address user, address token)` — consultar tu saldo  
-
-### 🔐 Roles
-- **DEFAULT_ADMIN_ROLE:** Control total del contrato.  
-- **BANK_MANAGER_ROLE:** Rol con permisos limitados para futuras funciones (ej. actualización de oráculo o límites).
-
-### 📬 Contrato Desplegado (ejemplo)
-> 🧱 Dirección: *por completar*  
-> 🔗 Verificación: *por completar*
+El objetivo es simular un banco descentralizado con soporte tanto para **ETH** como para **tokens ERC-20**, añadiendo además una **contabilidad interna basada en USD** a través de un **oráculo de precios Chainlink**.
 
 ---
 
-### 📘 License
-MIT License © 2025 — Daniela Silvana Tochi
+### ⚙️ Principales mejoras implementadas
+
+| Categoría | Mejora | Descripción |
+|------------|---------|-------------|
+| 🧩 **Control de acceso** | `AccessControl` de OpenZeppelin | Permite funciones administrativas seguras mediante roles (`BANK_MANAGER_ROLE`). |
+| 💰 **Soporte multi-token** | ETH + ERC20 | Usuarios pueden depositar y retirar tanto ETH como tokens ERC-20. |
+| 🧮 **Contabilidad interna** | Mappings anidados | `balances[user][token]` para manejar múltiples activos. |
+| 🔗 **Oráculo Chainlink ETH/USD** | Precio en tiempo real | Conversión del valor en ETH a USD para controlar el límite del banco. |
+| 🧠 **Variables inmutables y constantes** | Eficiencia y seguridad | Uso de `immutable` y `constant` para datos clave. |
+| 🪙 **Conversión de decimales** | Estandarización | Conversión a formato USDC (6 decimales) para todas las operaciones internas. |
+| 🛡️ **Seguridad** | Patrón Checks-Effects-Interactions y ReentrancyGuard | Prevención de reentradas y vulnerabilidades comunes. |
+| 📢 **Eventos y errores personalizados** | Transparencia y debugging | Emite eventos `Deposited`, `Withdrawn` y `BankCapUpdated`. |
+| 🧾 **Documentación NatSpec** | Código profesional | Comentarios claros y estructura limpia. |
+
+---
+
+### 🧱 Variables principales
+
+| Tipo | Nombre | Descripción |
+|------|---------|-------------|
+| `bytes32` | `BANK_MANAGER_ROLE` | Rol administrativo del banco. |
+| `AggregatorV3Interface` | `priceFeed` | Oráculo ETH/USD de Chainlink. |
+| `uint256` | `bankCapUSD` | Límite máximo del banco (en USD, 6 decimales). |
+| `mapping(address => mapping(address => uint256))` | `balances` | Contabilidad multi-token por usuario. |
+
+---
+
+### 🚀 Despliegue
+
+- **Red:** Sepolia Testnet  
+- **Herramienta:** Remix IDE  
+- **Wallet:** MetaMask  
+- **Versión Solidity:** 0.8.19  
+- **Oráculo Chainlink ETH/USD (Sepolia):**  
+  `0x694AA1769357215DE4FAC081bf1f309aDC325306`
+
+#### **Constructor parameters**
+| Parámetro | Descripción | Ejemplo |
+|------------|--------------|---------|
+| `_priceFeed` | Dirección del oráculo Chainlink | `0x694AA1769357215DE4FAC081bf1f309aDC325306` |
+| `_bankCapUSD` | Límite máximo en USD (6 decimales) | `100000000` (100 USD) |
+
+---
+
+### 🧪 Cómo interactuar
+
+1. Abrir **Remix IDE** y conectar **MetaMask** a la red **Sepolia**.  
+2. Compilar el contrato `KipuBankV2.sol` con versión **0.8.19**.  
+3. Desplegarlo ingresando:
+   - `_priceFeed`: dirección del oráculo ETH/USD  
+   - `_bankCapUSD`: por ejemplo, `100000000`
+4. Probar funciones:
+   - `depositETH()` → enviar ETH usando el campo **Value** (en wei).  
+   - `depositToken(address token, uint256 amount)` → aprobar primero el token ERC-20 y luego depositar.  
+   - `withdrawETH(uint256 amount)` → retirar ETH.  
+   - `withdrawToken(address token, uint256 amount)` → retirar tokens ERC-20.  
+   - `updateBankCap(uint256 newCap)` → disponible solo para el rol `BANK_MANAGER_ROLE`.  
+   - `balances(user, token)` → ver saldos por usuario y token.
+
+---
+
+### 🧠 Decisiones de diseño
+
+- **Se usa `AccessControl`** para mantener una arquitectura escalable, permitiendo agregar más roles en el futuro.  
+- **La contabilidad interna se basa en USD**, lo que facilita integrar en el futuro límites dinámicos o préstamos colateralizados.  
+- **El uso del oráculo Chainlink** asegura una fuente de datos descentralizada y confiable.  
+- **El patrón de seguridad CEI (Checks-Effects-Interactions)** garantiza operaciones seguras y resistentes a ataques de reentrada.
+
+---
+
+### 👩‍💻 Autoría
+
+Desarrollado por **Daniela Silvana Tochi**  
+Para el **Módulo 3 – Aplicaciones descentralizadas**  
+**Año:** 2025  
+**Licencia:** MIT  
+
+---
+
+## 🇬🇧 English
+
+### 📖 Description
+
+**KipuBankV2** is an upgraded version of the original **KipuBank** smart contract, developed as the **Final Project for Module 2 – Web3 Development Course**.  
+This version introduces **access control, multi-token support, Chainlink oracle integration, and improved security and accounting**, following Solidity and Web3 best practices.
+
+The goal is to simulate a decentralized bank that supports both **ETH** and **ERC-20 tokens**, with internal accounting based on **USD values** using the **Chainlink ETH/USD price feed**.
+
+---
+
+### ⚙️ Main Improvements
+
+| Category | Feature | Description |
+|-----------|----------|-------------|
+| 🧩 **Access Control** | OpenZeppelin `AccessControl` | Adds secure admin operations via `BANK_MANAGER_ROLE`. |
+| 💰 **Multi-token Support** | ETH + ERC20 | Users can deposit and withdraw both native ETH and ERC-20 tokens. |
+| 🧮 **Internal Accounting** | Nested mappings | Tracks balances as `balances[user][token]`. |
+| 🔗 **Chainlink Oracle Integration** | ETH/USD Feed | Converts ETH value to USD to manage the bank cap. |
+| 🧠 **Constants and Immutables** | Gas-efficient | Defines immutable and constant values for key parameters. |
+| 🪙 **Decimal Conversion** | USDC standard | Converts all balances to 6 decimals (USDC style). |
+| 🛡️ **Security** | CEI pattern + ReentrancyGuard | Protects against reentrancy and unsafe interactions. |
+| 📢 **Custom Events & Errors** | Debug-friendly | Emits `Deposited`, `Withdrawn`, and `BankCapUpdated`. |
+| 🧾 **NatSpec Documentation** | Clarity | Clean, documented, and readable Solidity code. |
+
+---
+
+### 🧱 Key Variables
+
+| Type | Name | Description |
+|------|------|-------------|
+| `bytes32` | `BANK_MANAGER_ROLE` | Admin role identifier. |
+| `AggregatorV3Interface` | `priceFeed` | Chainlink ETH/USD oracle address. |
+| `uint256` | `bankCapUSD` | Maximum allowed total (in USD, 6 decimals). |
+| `mapping(address => mapping(address => uint256))` | `balances` | Tracks user balances for multiple tokens. |
+
+---
+
+### 🚀 Deployment
+
+- **Network:** Sepolia Testnet  
+- **Tool:** Remix IDE  
+- **Wallet:** MetaMask  
+- **Solidity version:** 0.8.19  
+- **Chainlink ETH/USD feed (Sepolia):**  
+  `0x694AA1769357215DE4FAC081bf1f309aDC325306`
+
+#### **Constructor parameters**
+| Parameter | Description | Example |
+|------------|--------------|---------|
+| `_priceFeed` | Chainlink ETH/USD feed address | `0x694AA1769357215DE4FAC081bf1f309aDC325306` |
+| `_bankCapUSD` | Bank cap in USD (6 decimals) | `100000000` (100 USD) |
+
+---
+
+### 🧪 How to Interact
+
+1. Open **Remix IDE** and connect **MetaMask** to the **Sepolia testnet**.  
+2. Compile `KipuBankV2.sol` using Solidity **0.8.19**.  
+3. Deploy the contract entering:
+   - `_priceFeed`: ETH/USD Chainlink address  
+   - `_bankCapUSD`: e.g. `100000000`
+4. Test functions:
+   - `depositETH()` → send ETH using the **Value** field (in wei).  
+   - `depositToken(address token, uint256 amount)` → approve token first, then deposit.  
+   - `withdrawETH(uint256 amount)` → withdraw ETH.  
+   - `withdrawToken(address token, uint256 amount)` → withdraw ERC20 tokens.  
+   - `updateBankCap(uint256 newCap)` → only callable by `BANK_MANAGER_ROLE`.  
+   - `balances(user, token)` → check balances by address and token.
+
+---
+
+### 🧠 Design Decisions
+
+- **`AccessControl`** provides scalability for future roles (e.g., auditor, liquidity provider).  
+- **USD-based accounting** simplifies future extensions like lending or yield systems.  
+- **Chainlink integration** ensures decentralized, reliable price data.  
+- **CEI pattern** and **ReentrancyGuard** enforce secure transaction flow.
+
+---
+
+### 👩‍💻 Author
+
+Developed by **Daniela Silvana Tochi**  
+**Module 3 – Aplicaciones descentralizadas**  
+**Year:** 2025  
+**License:** MIT

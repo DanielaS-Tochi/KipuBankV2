@@ -8,6 +8,11 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "_priceFeed",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "_bankCapUSD",
 						"type": "uint256"
@@ -48,21 +53,16 @@
 				"type": "error"
 			},
 			{
-				"inputs": [],
-				"name": "InvalidToken",
-				"type": "error"
-			},
-			{
 				"anonymous": false,
 				"inputs": [
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "totalUSD",
+						"name": "newCap",
 						"type": "uint256"
 					}
 				],
-				"name": "BankCapReached",
+				"name": "BankCapUpdated",
 				"type": "event"
 			},
 			{
@@ -87,7 +87,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "Deposit",
+				"name": "Deposited",
 				"type": "event"
 			},
 			{
@@ -187,7 +187,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "Withdraw",
+				"name": "Withdrawn",
 				"type": "event"
 			},
 			{
@@ -218,12 +218,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "WITHDRAW_LIMIT",
+				"name": "USDC_DECIMALS",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "uint8",
 						"name": "",
-						"type": "uint256"
+						"type": "uint8"
 					}
 				],
 				"stateMutability": "view",
@@ -233,16 +233,16 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "user",
+						"name": "",
 						"type": "address"
 					},
 					{
 						"internalType": "address",
-						"name": "token",
+						"name": "",
 						"type": "address"
 					}
 				],
-				"name": "balanceOf",
+				"name": "balances",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -267,6 +267,13 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "depositETH",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -279,9 +286,9 @@
 						"type": "uint256"
 					}
 				],
-				"name": "deposit",
+				"name": "depositToken",
 				"outputs": [],
-				"stateMutability": "payable",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -346,6 +353,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "priceFeed",
+				"outputs": [
+					{
+						"internalType": "contract AggregatorV3Interface",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "bytes32",
@@ -402,7 +422,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "totalDepositedETH",
+				"name": "totalDepositedUSD",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -411,6 +431,32 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "newCap",
+						"type": "uint256"
+					}
+				],
+				"name": "updateBankCap",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "withdrawETH",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -426,13 +472,18 @@
 						"type": "uint256"
 					}
 				],
-				"name": "withdraw",
+				"name": "withdrawToken",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
 			}
 		],
 		"devdoc": {
+			"author": "[Tu nombre]",
 			"errors": {
 				"AccessControlBadConfirmation()": [
 					{
@@ -458,12 +509,6 @@
 			},
 			"kind": "dev",
 			"methods": {
-				"deposit(address,uint256)": {
-					"params": {
-						"amount": "Amount to deposit",
-						"token": "Address of the token, use address(0) for ETH"
-					}
-				},
 				"getRoleAdmin(bytes32)": {
 					"details": "Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}."
 				},
@@ -481,29 +526,15 @@
 				},
 				"supportsInterface(bytes4)": {
 					"details": "Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[ERC section] to learn more about how these ids are created. This function call must use less than 30 000 gas."
-				},
-				"withdraw(address,uint256)": {
-					"params": {
-						"amount": "Amount to withdraw",
-						"token": "Address of the token (use address(0) for ETH)"
-					}
 				}
 			},
+			"title": "KipuBankV2",
 			"version": 1
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {
-				"balanceOf(address,address)": {
-					"notice": "View balance of a user for a specific token"
-				},
-				"deposit(address,uint256)": {
-					"notice": "Deposit ETH or ERC20 tokens into the bank"
-				},
-				"withdraw(address,uint256)": {
-					"notice": "Withdraw ETH or ERC20 tokens"
-				}
-			},
+			"methods": {},
+			"notice": "Upgraded version of KipuBank with multi-token support, Chainlink oracle integration,         role-based access control, and improved accounting and security.",
 			"version": 1
 		}
 	},
@@ -523,6 +554,14 @@
 		"remappings": []
 	},
 	"sources": {
+		"@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol": {
+			"keccak256": "0xfe4e8bb4861bb3860ba890ab91a3b818ec66e5a8f544fb608cfcb73f433472cd",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://644cff84052e1e82b5bb502b2a46e8f142a62b0db4cd9b38200798ba8373c6f7",
+				"dweb:/ipfs/QmTa99QHrJBn3SXDizquPBUiTxVCNKQrHgaWJhuds5Sce2"
+			]
+		},
 		"@openzeppelin/contracts/access/AccessControl.sol": {
 			"keccak256": "0x1a6b4f6b7798ab80929d491b89d5427a9b3338c0fd1acd0ba325f69c6f1646af",
 			"license": "MIT",
@@ -537,6 +576,14 @@
 			"urls": [
 				"bzz-raw://b308f882e796f7b79c9502deacb0a62983035c6f6f4e962b319ba6a1f4a77d3d",
 				"dweb:/ipfs/QmaWCW7ahEQqFjwhSUhV7Ae7WhfNvzSpE7DQ58hvEooqPL"
+			]
+		},
+		"@openzeppelin/contracts/security/ReentrancyGuard.sol": {
+			"keccak256": "0xa535a5df777d44e945dd24aa43a11e44b024140fc340ad0dfe42acf4002aade1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://41319e7f621f2dc3733511332c4fd032f8e32ad2aa7fd6f665c19741d9941a34",
+				"dweb:/ipfs/QmcYR3bd862GD1Bc7jwrU9bGxrhUu5na1oP964bDCu2id1"
 			]
 		},
 		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
@@ -572,11 +619,11 @@
 			]
 		},
 		"src/KipuBankV2.sol": {
-			"keccak256": "0x8dff2af708c32a7b30efdf1077420f520c1a0e3eaa01ccbe388e2838d2742b27",
+			"keccak256": "0xbe270bdda87c9d5769e5e0f4230d9f80a3e595aa85f07c1df61930cf69e94b76",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bea258cf00bb080155137a0382a4403118e77c8ea56f752ae8a9120173334653",
-				"dweb:/ipfs/QmfKkX2LZ3RTXVsPhUMa1EdriKbts7S2SP9xGKe1BBR5fr"
+				"bzz-raw://81fab2fb69dede66bd8d933526c0c0876df2496b1502a52c3af6fa9ec2dd83b5",
+				"dweb:/ipfs/QmU8UXYsH9QaietopeJ7LFUGjsDMaQGngayVnrwjrQraUP"
 			]
 		}
 	},

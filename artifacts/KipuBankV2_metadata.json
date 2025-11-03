@@ -483,7 +483,7 @@
 			}
 		],
 		"devdoc": {
-			"author": "[Tu nombre]",
+			"author": "[Daniela Silvana Tochi]",
 			"errors": {
 				"AccessControlBadConfirmation()": [
 					{
@@ -619,11 +619,11 @@
 			]
 		},
 		"src/KipuBankV2.sol": {
-			"keccak256": "0xbe270bdda87c9d5769e5e0f4230d9f80a3e595aa85f07c1df61930cf69e94b76",
+			"keccak256": "0x2c80d4a562769a3b2ec5faa2d033c082c45596f3ad0a58c3e63be959ca7bfbf3",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://81fab2fb69dede66bd8d933526c0c0876df2496b1502a52c3af6fa9ec2dd83b5",
-				"dweb:/ipfs/QmU8UXYsH9QaietopeJ7LFUGjsDMaQGngayVnrwjrQraUP"
+				"bzz-raw://70caa77d8f98d08e13079c630d0d9512055f5bee7e8dec76cdf040941bd3dff0",
+				"dweb:/ipfs/QmbjC7J9eJLQHAaBHmDCsv8U5nvKF4G2SJagpS83y18jGR"
 			]
 		}
 	},

@@ -1,6 +1,16 @@
 # KipuBankV3
 
 **Autor:** Daniela Silvana Tochi
+**Licencia:** MIT
+
+## 🚀 Inicio Rápido
+
+**¿Primera vez aquí?** Lee estas guías en orden:
+1. **[ENV_SETUP.md](./ENV_SETUP.md)** - Configura tu .env en 2 minutos
+2. **[DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)** - Despliega el contrato paso a paso
+3. **[QUICKSTART.md](./QUICKSTART.md)** - Comandos y ejemplos rápidos
+
+**¿Buscas algo específico?** Consulta **[INDEX.md](./INDEX.md)** para navegar toda la documentación.
 
 ## Descripción General
 

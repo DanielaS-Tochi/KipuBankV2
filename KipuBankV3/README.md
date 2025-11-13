@@ -386,7 +386,7 @@ MIT License - ver archivo LICENSE para detalles
 
 ## Agradecimientos
 
-- Equipo de Kipu por la educación en desarrollo Web3
+- Equipo de ETH-KIPU y Profe Seba por la educación en desarrollo Web3
 - Comunidad de OpenZeppelin por los contratos seguros
 - Uniswap por el protocolo de intercambio descentralizado
 - Foundry por las herramientas de desarrollo

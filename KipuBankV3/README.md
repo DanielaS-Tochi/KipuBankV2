@@ -5,12 +5,15 @@
 **Red:** Sepolia Testnet
 **Versión:** 3.0.0
 
-## 📦 Información de Entrega
+## 📦 Información de Entrega - Examen Final
+
+### Links de Entrega
+- **📂 Repositorio GitHub:** [https://github.com/DanielaS-Tochi/KipuBankV2](https://github.com/DanielaS-Tochi/KipuBankV2)
+- **🔍 Contrato Verificado:** [https://sepolia.etherscan.io/address/0x1335f3c4ccc7ef6cce7b14f101b6dc94d87bbdf8](https://sepolia.etherscan.io/address/0x1335f3c4ccc7ef6cce7b14f101b6dc94d87bbdf8)
 
 ### Contrato Desplegado y Verificado
 - **Dirección del Contrato:** `0x1335f3c4ccc7ef6cce7b14f101b6dc94d87bbdf8`
 - **Red:** Sepolia Testnet
-- **Etherscan:** [https://sepolia.etherscan.io/address/0x1335f3c4ccc7ef6cce7b14f101b6dc94d87bbdf8](https://sepolia.etherscan.io/address/0x1335f3c4ccc7ef6cce7b14f101b6dc94d87bbdf8)
 - **Estado:** ✅ Verificado y Publicado
 - **Compiler:** Solidity 0.8.19
 - **Optimización:** Habilitada (200 runs)
@@ -19,6 +22,18 @@
 - **Uniswap V2 Router:** `0xC532a74256D3Db42D0Bf7a0400fEFDbad7694008`
 - **USDC Address:** `0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238`
 - **Bank Cap:** `1000000000000` (1,000,000 USDC)
+
+### ✅ Checklist de Requisitos Cumplidos
+- [x] Contrato acepta cualquier token intercambiable en Uniswap V2
+- [x] Swaps ejecutados dentro del smart contract
+- [x] Funcionalidad de KipuBankV2 preservada
+- [x] Bank cap respetado en todos los depósitos
+- [x] Tests comprehensivos (11 tests pasando)
+- [x] Contrato desplegado en Sepolia
+- [x] Contrato verificado en Etherscan
+- [x] Documentación completa
+- [x] Scripts de deployment incluidos
+- [x] Código limpio y bien documentado
 
 ---
 
@@ -363,7 +378,8 @@ MIT License - ver archivo LICENSE para detalles
 
 ## Contacto y Recursos
 
-- **Etherscan (Contrato Verificado)**: https://sepolia.etherscan.io/address/0x1335f3c4ccc7ef6cce7b14f101b6dc94d87bbdf8
+- **📂 GitHub Repository**: https://github.com/DanielaS-Tochi/KipuBankV2
+- **🔍 Etherscan (Contrato Verificado)**: https://sepolia.etherscan.io/address/0x1335f3c4ccc7ef6cce7b14f101b6dc94d87bbdf8
 - **Documentación Uniswap V2**: https://docs.uniswap.org/contracts/v2/overview
 - **OpenZeppelin Contracts**: https://docs.openzeppelin.com/contracts/
 - **Foundry Book**: https://book.getfoundry.sh/

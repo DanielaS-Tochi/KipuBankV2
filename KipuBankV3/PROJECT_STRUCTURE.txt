@@ -1,0 +1,191 @@
+KIPUBANKV3 PROJECT STRUCTURE
+============================
+
+Project: KipuBankV3 - Advanced DeFi Banking with Uniswap V2 Integration
+Author: Daniela Silvana Tochi
+Framework: Foundry (Forge, Cast, Anvil)
+Solidity: 0.8.19
+
+DIRECTORY TREE
+--------------
+KipuBankV3/
+├── src/
+│   ├── KipuBankV3.sol                      [Main contract - 200 lines]
+│   └── interfaces/
+│       ├── IUniswapV2Router02.sol          [Uniswap Router interface]
+│       └── IUniswapV2Factory.sol           [Uniswap Factory interface]
+│
+├── test/
+│   └── KipuBankV3.t.sol                    [Comprehensive tests - 11 tests]
+│
+├── script/
+│   ├── Deploy.s.sol                        [Generic deployment script]
+│   ├── DeploySepolia.s.sol                 [Sepolia deployment script]
+│   ├── Verify.s.sol                        [Contract verification script]
+│   └── Interact.s.sol                      [Interaction script]
+│
+├── DOCUMENTATION/
+│   ├── INDEX.md                            [Documentation index]
+│   ├── README.md                           [Main documentation - 800+ lines]
+│   ├── PROJECT_SUMMARY.md                  [Executive summary - 350+ lines]
+│   ├── QUICKSTART.md                       [Quick start guide - 300+ lines]
+│   ├── TECHNICAL.md                        [Technical docs - 1200+ lines]
+│   ├── SECURITY.md                         [Security docs - 200+ lines]
+│   └── COMPARISON.md                       [Version comparison - 400+ lines]
+│
+├── CONFIGURATION/
+│   ├── foundry.toml                        [Foundry configuration]
+│   ├── remappings.txt                      [Import mappings]
+│   ├── Makefile                            [Build automation]
+│   ├── .env.example                        [Environment template]
+│   └── .gitignore                          [Git ignore rules]
+│
+└── PROJECT_STRUCTURE.txt                   [This file]
+
+MAIN CONTRACT FEATURES
+----------------------
+✅ Multi-token deposits (ETH, USDC, any ERC20)
+✅ Automatic swaps to USDC via Uniswap V2
+✅ Intelligent routing (direct or via WETH)
+✅ Slippage protection (5% max)
+✅ Bank cap enforcement
+✅ Role-based access control
+✅ Reentrancy protection
+✅ SafeERC20 transfers
+✅ Gas optimized
+
+KEY FUNCTIONS
+-------------
+- depositETH()              : Deposit ETH, auto-swap to USDC
+- depositToken()            : Deposit any ERC20, swap to USDC if needed
+- withdraw()                : Withdraw USDC balance
+- updateBankCap()           : Update bank capacity (admin only)
+- balanceOf()               : Check user balance
+- getAvailableCap()         : Check available capacity
+
+SECURITY FEATURES
+-----------------
+✅ ReentrancyGuard on all critical functions
+✅ AccessControl for role-based permissions
+✅ SafeERC20 for safe token transfers
+✅ Custom errors for gas efficiency
+✅ Immutable critical addresses
+✅ Checks-Effects-Interactions pattern
+✅ Liquidity validation before swaps
+
+TESTS COVERAGE
+--------------
+11 comprehensive tests:
+1. testDepositETH              : ETH deposit with swap
+2. testDepositUSDC             : Direct USDC deposit
+3. testDepositDAI              : ERC20 deposit with swap
+4. testWithdraw                : Withdrawal functionality
+5. testBankCapRespected        : Bank cap enforcement
+6. testMultipleUsersDeposit    : Multi-user scenario
+7. testRevertInsufficientBalance : Error handling
+8. testRevertZeroAmount        : Input validation
+9. testUpdateBankCap           : Admin function
+10. testGetAvailableCap        : View function
+11. testReceiveFunction        : Fallback function
+
+DEPLOYMENT
+----------
+Networks Supported:
+- Sepolia Testnet (pre-configured)
+- Any EVM-compatible network
+
+Sepolia Addresses:
+- Uniswap Router: 0xC532a74256D3Db42D0Bf7a0400fEFDbad7694008
+- USDC: 0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238
+- WETH: 0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14
+
+Commands:
+- Deploy: make deploy-sepolia
+- Test: make test
+- Coverage: make coverage
+- Format: make format
+
+DOCUMENTATION STATS
+-------------------
+Total documentation: 3,250+ lines
+- README.md: 800+ lines
+- TECHNICAL.md: 1,200+ lines
+- SECURITY.md: 200+ lines
+- QUICKSTART.md: 300+ lines
+- COMPARISON.md: 400+ lines
+- PROJECT_SUMMARY.md: 350+ lines
+
+Code stats:
+- Main contract: 200 lines
+- Tests: 600+ lines
+- Scripts: 150+ lines
+- Interfaces: 80 lines
+
+EXAM REQUIREMENTS MET
+---------------------
+✅ Accept any Uniswap V2 supported token
+✅ Execute automatic swaps to USDC
+✅ Preserve KipuBankV2 functionality
+✅ Respect bank cap limit
+✅ Professional code quality
+✅ Comprehensive tests
+✅ Security best practices
+✅ Complete documentation
+
+TECHNOLOGIES USED
+-----------------
+- Solidity 0.8.19
+- Foundry (Forge, Cast, Anvil)
+- OpenZeppelin Contracts
+- Uniswap V2 Protocol
+- SafeERC20
+- AccessControl
+- ReentrancyGuard
+
+GAS OPTIMIZATION
+----------------
+- Immutable variables: ~2100 gas saved per read
+- Custom errors: ~100 gas saved per revert
+- Efficient routing: Up to 40K gas saved
+- Short-circuit evaluation
+- Optimized storage layout
+
+DEVELOPMENT WORKFLOW
+--------------------
+1. Install: make install
+2. Build: make build
+3. Test: make test
+4. Deploy: make deploy-sepolia
+5. Verify: make verify
+6. Interact: make interact
+
+NEXT STEPS
+----------
+1. ✅ Review documentation (start with INDEX.md)
+2. ✅ Run tests (forge test)
+3. ✅ Deploy to testnet
+4. ✅ Verify on Etherscan
+5. ⏳ Security audit (recommended)
+6. ⏳ Mainnet deployment
+
+LEARNING OUTCOMES
+-----------------
+This project demonstrates:
+✅ DeFi protocol integration
+✅ DEX composability
+✅ Smart contract security
+✅ Gas optimization
+✅ Professional testing
+✅ Comprehensive documentation
+✅ Production-ready code
+
+CONTACT & RESOURCES
+-------------------
+GitHub: [Repository URL]
+Documentation: See INDEX.md
+Issues: GitHub Issues
+Security: See SECURITY.md
+
+Last Updated: 2025-11-13
+Version: 3.0.0
+License: MIT

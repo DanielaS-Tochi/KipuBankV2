@@ -8,7 +8,7 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 /**
  * @title KipuBankV2
- * @author [Daniela Silvana Tochi]
+ * @author Daniela Silvana Tochi
  * @notice Upgraded version of KipuBank with multi-token support, Chainlink oracle integration,
  *         role-based access control, and improved accounting and security.
  */

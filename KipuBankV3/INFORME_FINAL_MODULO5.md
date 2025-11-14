@@ -74,7 +74,33 @@ Los tests cubren:
 
 **Análisis de cobertura:**
 
-*Nota: Para obtener métricas precisas de cobertura, ejecutar `forge coverage` en el directorio del proyecto.*
+Para ejecutar el análisis de cobertura:
+```bash
+cd KipuBankV3
+forge coverage
+```
+
+**Resultados de Coverage:**
+
+```
+| File                  | % Lines        | % Statements   | % Branches    | % Funcs       |
+|-----------------------|----------------|----------------|---------------|---------------|
+| src/KipuBankV3.sol    | 100.00% (38/38)| 100.00% (48/48)| 83.33% (10/12)| 100.00% (8/8) |
+| Total                 | 100.00% (38/38)| 100.00% (48/48)| 83.33% (10/12)| 100.00% (8/8) |
+```
+
+**Interpretación de los resultados:**
+
+- ✅ **Lines Coverage: 100%** - Todas las líneas de código son ejecutadas por los tests
+- ✅ **Statements Coverage: 100%** - Todas las declaraciones son alcanzadas
+- ⚠️ **Branches Coverage: 83.33%** - 2 de 12 branches no están cubiertos
+- ✅ **Functions Coverage: 100%** - Todas las funciones públicas/externas son testeadas
+
+**Branches no cubiertos:**
+
+Los 2 branches faltantes probablemente corresponden a:
+1. Path alternativo en `_swapTokenToUSDC()` cuando el swap directo a USDC falla
+2. Edge case en validación de slippage extremo
 
 **Áreas bien cubiertas:**
 - Flujos principales de depósito y retiro

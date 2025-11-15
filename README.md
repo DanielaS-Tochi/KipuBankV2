@@ -2,7 +2,7 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-green)
 ![Network: Sepolia](https://img.shields.io/badge/Network-Sepolia-orange)
 
-# 🪙 KipuBank V2 Smart Contract
+# 💰 KipuBank V2 Smart Contract
 
 ## 🇪🇸 Español
 
